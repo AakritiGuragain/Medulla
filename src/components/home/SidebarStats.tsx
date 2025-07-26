@@ -1,8 +1,11 @@
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { TrendingUp, Users, Award, Recycle, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const SidebarStats = () => {
+  const navigate = useNavigate();
+
   const stats = [
     { label: 'Your Points', value: '1,247', icon: Award, color: 'text-yellow-600' },
     { label: 'Community Members', value: '12.4K', icon: Users, color: 'text-primary' },
@@ -15,6 +18,10 @@ const SidebarStats = () => {
     { label: 'Find Drop Points', action: '/drop-points', primary: false },
     { label: 'Browse Bazar', action: '/bazar', primary: false },
   ];
+
+  const handleQuickAction = (action: string) => {
+    navigate(action);
+  };
 
   return (
     <div className="space-y-6">
@@ -46,6 +53,7 @@ const SidebarStats = () => {
               variant={action.primary ? "default" : "outline"}
               className="w-full justify-between"
               size="sm"
+              onClick={() => handleQuickAction(action.action)}
             >
               {action.label}
               <ArrowRight className="h-4 w-4" />

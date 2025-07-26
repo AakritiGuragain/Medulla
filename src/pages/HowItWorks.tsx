@@ -2,8 +2,11 @@ import Layout from '@/components/layout/Layout';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Upload, Scan, Award, ShoppingBag, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const HowItWorks = () => {
+  const navigate = useNavigate();
+
   const steps = [
     {
       icon: Upload,
@@ -103,11 +106,11 @@ const HowItWorks = () => {
             Join thousands of community members already making a difference. 
             Start by uploading your first waste photo today.
           </p>
-          <Button size="lg" className="mr-4">
+          <Button size="lg" className="mr-4" onClick={() => navigate('/')}>
             Upload Waste Photo
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
-          <Button variant="outline" size="lg">
+          <Button variant="outline" size="lg" onClick={() => navigate('/drop-points')}>
             Find Drop Points
           </Button>
         </div>

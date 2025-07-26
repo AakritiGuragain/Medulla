@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Heart, MessageCircle, Share2, MoreHorizontal, MapPin, Award } from 'lucide-react';
+import { Heart, MessageCircle, Share2, MoreHorizontal, MapPin, Award, Smile } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface PostCardProps {
@@ -16,6 +16,7 @@ interface PostCardProps {
     content: string;
     image?: string;
     wasteType?: string;
+    feeling?: string;
     points?: number;
     timestamp: string;
     likes: number;
@@ -47,9 +48,13 @@ const PostCard = ({ post }: PostCardProps) => {
           <div>
             <h3 className="font-semibold text-foreground">{post.user.name}</h3>
             <div className="flex items-center text-sm text-muted-foreground space-x-2">
-              <MapPin className="h-3 w-3" />
-              <span>{post.user.location}</span>
-              <span>•</span>
+              {post.user.location && (
+                <>
+                  <MapPin className="h-3 w-3" />
+                  <span>{post.user.location}</span>
+                  <span>•</span>
+                </>
+              )}
               <span>{post.timestamp}</span>
             </div>
           </div>
@@ -63,20 +68,26 @@ const PostCard = ({ post }: PostCardProps) => {
       <div className="mb-4">
         <p className="text-foreground leading-relaxed">{post.content}</p>
         
-        {/* Waste classification badge */}
-        {post.wasteType && (
-          <div className="mt-3 flex items-center space-x-2">
+        {/* Waste classification and feeling badges */}
+        <div className="mt-3 flex items-center space-x-2">
+          {post.wasteType && (
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-accent text-accent-foreground text-sm font-medium">
               <Award className="h-3 w-3 mr-1" />
               {post.wasteType}
             </div>
-            {post.points && (
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-success text-success-foreground text-sm font-medium">
-                +{post.points} points
-              </div>
-            )}
-          </div>
-        )}
+          )}
+          {post.feeling && (
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
+              <Smile className="h-3 w-3 mr-1" />
+              {post.feeling}
+            </div>
+          )}
+          {post.points && (
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-success text-success-foreground text-sm font-medium">
+              +{post.points} points
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Image */}

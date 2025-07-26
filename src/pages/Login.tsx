@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Shield, Mail, Smartphone } from 'lucide-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -14,6 +15,7 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,6 +34,7 @@ const Login = () => {
           localStorage.setItem('access', data.access);
           localStorage.setItem('refresh', data.refresh);
           setMessage('Login successful!');
+          setTimeout(() => navigate('/'), 500); // Redirect to home after short delay
         } else {
           setMessage(data.detail || 'Login failed.');
         }

@@ -1,12 +1,20 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Upload, MapPin, Gift, ShoppingBag, User, Globe } from 'lucide-react';
+import { Menu, X, Upload, MapPin, Gift, ShoppingBag, User, Globe, LogOut } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const isLoggedIn = Boolean(localStorage.getItem('access'));
+
+  const handleLogout = () => {
+    localStorage.removeItem('access');
+    localStorage.removeItem('refresh');
+    navigate('/login');
+  };
 
   const navItems = [
     { name: 'Home', path: '/', icon: null },
@@ -55,12 +63,19 @@ const Navigation = () => {
               <Globe className="h-4 w-4 mr-2" />
               EN
             </Button>
-            <Button variant="outline" size="sm" asChild>
-              <Link to="/login">
-                <User className="h-4 w-4 mr-2" />
-                Login
-              </Link>
-            </Button>
+            {isLoggedIn ? (
+              <Button variant="outline" size="sm" onClick={handleLogout}>
+                <LogOut className="h-4 w-4 mr-2" />
+                Logout
+              </Button>
+            ) : (
+              <Button variant="outline" size="sm" asChild>
+                <Link to="/login">
+                  <User className="h-4 w-4 mr-2" />
+                  Login
+                </Link>
+              </Button>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -102,12 +117,19 @@ const Navigation = () => {
                     <Globe className="h-4 w-4 mr-2" />
                     English
                   </Button>
-                  <Button variant="outline" size="sm" asChild>
-                    <Link to="/login">
-                      <User className="h-4 w-4 mr-2" />
-                      Login
-                    </Link>
-                  </Button>
+                  {isLoggedIn ? (
+                    <Button variant="outline" size="sm" onClick={() => { setIsOpen(false); handleLogout(); }}>
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Logout
+                    </Button>
+                  ) : (
+                    <Button variant="outline" size="sm" asChild>
+                      <Link to="/login" onClick={() => setIsOpen(false)}>
+                        <User className="h-4 w-4 mr-2" />
+                        Login
+                      </Link>
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>
