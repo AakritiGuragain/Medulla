@@ -154,4 +154,38 @@ All colors MUST be HSL. Soft edges, human-centered design.
     box-shadow: var(--shadow-medium);
     transform: translateY(-1px);
   }
+
+  /* --- Leaflet Specific Styles --- */
+  /* Ensure the Leaflet map container takes up the full height of its parent */
+  .leaflet-container {
+    width: 100%;
+    height: 100%; /* Important for the h-80 class to work */
+    border-radius: var(--radius); /* Apply your global border-radius */
+  }
+
+  /* Optional: Style for Leaflet popups to match your theme */
+  .leaflet-popup-content-wrapper {
+    background: hsl(var(--card));
+    color: hsl(var(--foreground));
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .leaflet-popup-tip {
+    background: hsl(var(--card));
+  }
+
+  .leaflet-control-container .leaflet-control-zoom-in,
+  .leaflet-control-container .leaflet-control-zoom-out,
+  .leaflet-control-container .leaflet-control-attribution {
+    background-color: hsl(var(--primary)) !important; /* Example: make controls match primary color */
+    color: hsl(var(--primary-foreground)) !important;
+    border-radius: var(--radius) !important;
+    border: none !important;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .leaflet-control-container .leaflet-control-attribution a {
+    color: hsl(var(--primary-foreground)) !important; /* Link color in attribution */
+  }
 }

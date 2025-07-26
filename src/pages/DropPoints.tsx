@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Layout from '@/components/layout/Layout';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import LeafletMap from '../components/common/LeafletMap'; // Ensure this path is correct
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { 
@@ -24,7 +25,7 @@ interface DropPoint {
   id: string;
   name: string;
   address: string;
-  coordinates: [number, number];
+  coordinates: [number, number]; // [longitude, latitude] or [latitude, longitude] - Leaflet uses [lat, lng]
   status: 'active' | 'full' | 'maintenance';
   capacity: number;
   currentFill: number;
@@ -37,7 +38,7 @@ interface DropPoint {
   nextPickup: string;
 }
 
-const DropPoints = () => {
+const DropPoints: React.FC = () => { // Correct and single definition of the component
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState('all');
   const [selectedPoint, setSelectedPoint] = useState<DropPoint | null>(null);
@@ -47,7 +48,7 @@ const DropPoints = () => {
       id: '1',
       name: 'Thamel Smart Collection Hub',
       address: 'Thamel Marg, Ward 26, Kathmandu',
-      coordinates: [85.3075, 27.7151],
+      coordinates: [27.7151, 85.3075], // Corrected to [lat, lng] for Leaflet
       status: 'active',
       capacity: 100,
       currentFill: 45,
@@ -62,7 +63,7 @@ const DropPoints = () => {
       id: '2',
       name: 'Patan Community Center',
       address: 'Mangal Bazar, Patan Durbar Square',
-      coordinates: [85.3206, 27.6742],
+      coordinates: [27.6742, 85.3206], // Corrected to [lat, lng] for Leaflet
       status: 'active',
       capacity: 150,
       currentFill: 78,
@@ -78,7 +79,7 @@ const DropPoints = () => {
       id: '3',
       name: 'Bhaktapur Recycling Station',
       address: 'Dattaleju Square, Bhaktapur',
-      coordinates: [85.4271, 27.6714],
+      coordinates: [27.6714, 85.4271], // Corrected to [lat, lng] for Leaflet
       status: 'full',
       capacity: 200,
       currentFill: 195,
@@ -94,7 +95,7 @@ const DropPoints = () => {
       id: '4',
       name: 'Bouddha Mobile Pickup',
       address: 'Bouddha Stupa Area',
-      coordinates: [85.3618, 27.7209],
+      coordinates: [27.7209, 85.3618], // Corrected to [lat, lng] for Leaflet
       status: 'active',
       capacity: 50,
       currentFill: 12,
@@ -249,30 +250,10 @@ const DropPoints = () => {
 
           {/* Map and Points List */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Mock Map */}
+            {/* Actual Leaflet Map */}
             <Card className="reloop-card p-6">
-              <div className="relative h-96 bg-gradient-accent rounded-lg overflow-hidden">
-                <div className="absolute inset-0 bg-green-100/50"></div>
-                <div className="absolute top-4 left-4 bg-white rounded-lg p-2 shadow-lg">
-                  <p className="text-sm font-medium">Kathmandu Valley</p>
-                  <p className="text-xs text-muted-foreground">{filteredPoints.length} drop points</p>
-                </div>
-                
-                {/* Mock map pins */}
-                <div className="absolute top-1/4 left-1/3 w-6 h-6 bg-success rounded-full flex items-center justify-center shadow-lg">
-                  <MapPin className="h-3 w-3 text-white" />
-                </div>
-                <div className="absolute top-1/2 right-1/3 w-6 h-6 bg-primary rounded-full flex items-center justify-center shadow-lg">
-                  <MapPin className="h-3 w-3 text-white" />
-                </div>
-                <div className="absolute bottom-1/3 left-1/2 w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center shadow-lg">
-                  <MapPin className="h-3 w-3 text-white" />
-                </div>
-                
-                <div className="absolute bottom-4 right-4 bg-white rounded-lg p-2 shadow-lg">
-                  <p className="text-xs text-muted-foreground">Interactive map coming soon</p>
-                </div>
-              </div>
+              {/* The LeafletMap component will take care of its own styling (h-80) */}
+              <LeafletMap />
             </Card>
 
             {/* Points List */}
