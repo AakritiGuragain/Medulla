@@ -11,6 +11,7 @@ import Kudos from "./pages/Kudos";
 import Bazar from "./pages/Bazar";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
+import Dashboard from "./pages/dashboard";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,8 @@ const App = () => (
           <Route path="/kudos" element={<Kudos />} />
           <Route path="/bazar" element={<Bazar />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} /> {/* ✅ Corrected */}
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Layout from '@/components/layout/Layout';
-import { WasteUpload, WasteCatalog, WasteCart } from '@/components/waste/WasteComponents';
+import { WasteCatalog, WasteCart } from '@/components/waste/WasteComponents';
 
 interface WasteItem {
   id: string;
@@ -30,7 +30,7 @@ const WhatWeBuy = () => {
             : cartItem
         );
       }
-      return [...prev, { ...item, quantity: 1, unit: 'kg' as const }];
+      return [...prev, { ...item, quantity: 1, unit: 'kg' }];
     });
   };
 
@@ -59,7 +59,7 @@ const WhatWeBuy = () => {
             What We <span className="text-primary">Buy</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Upload photos for AI-powered waste classification or browse our catalog. 
+            Scan waste for AI-powered classification or browse our catalog. 
             Turn your waste into valuable points redeemable for cash, art, and community events.
           </p>
         </div>
@@ -67,7 +67,22 @@ const WhatWeBuy = () => {
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="xl:col-span-2 space-y-8">
-            <WasteUpload />
+            {/* Scanner Link Box */}
+            <div className="flex flex-col items-center gap-4 p-4 border border-dashed border-gray-300 rounded-lg">
+              <p className="text-lg text-muted-foreground text-center">
+                Scan your waste using your camera for instant classification (Organic or Inorganic)
+              </p>
+              <a
+                href="/waste-scanner.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition"
+              >
+                Open Scanner
+              </a>
+            </div>
+
+            {/* Waste Catalog */}
             <WasteCatalog onAddToCart={addToCart} />
           </div>
 

@@ -2,42 +2,51 @@ import Layout from '@/components/layout/Layout';
 import CreatePost from '@/components/home/CreatePost';
 import PostCard from '@/components/home/PostCard';
 import SidebarStats from '@/components/home/SidebarStats';
-import { useEffect, useState } from 'react';
 
 const Index = () => {
-  const [posts, setPosts] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchPosts = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch('http://localhost:8000/api/journeys/');
-      const data = await res.json();
-      if (Array.isArray(data)) {
-        setPosts(data.map((j: any) => ({
-          id: j.id,
-          user: {
-            name: j.user,
-            location: j.location || '',
-          },
-          content: j.description,
-          image: j.image, // Use the full URL from backend
-          timestamp: new Date(j.timestamp).toLocaleString(),
-          likes: 0,
-          comments: 0,
-          wasteType: j.waste_type,
-          feeling: j.feeling,
-        })));
-      }
-    } catch (err) {
-      console.error('Error fetching posts:', err);
-    }
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  // Sample data - in a real app this would come from an API
+  const samplePosts = [
+    {
+      id: '1',
+      user: {
+        name: 'Maya Sharma',
+        location: 'Thamel, Kathmandu',
+      },
+      content: '🌱 Just dropped off 5kg of plastic bottles at the smart collection point! The AI scanner identified them perfectly and I earned 125 points. These will go toward my goal of getting art supplies for my daughter. Love how technology is making recycling so rewarding! 💚',
+      wasteType: 'Plastic Bottles',
+      points: 125,
+      timestamp: '2 hours ago',
+      likes: 24,
+      comments: 8,
+      isLiked: true,
+    },
+    {
+      id: '2',
+      user: {
+        name: 'Rajesh Thapa',
+        location: 'Patan, Lalitpur',
+      },
+      content: 'Amazing to see the ReLoop community growing! Today I helped my neighbor set up their first waste classification. The impact we\'re making together is incredible. 🔄♻️',
+      timestamp: '4 hours ago',
+      likes: 18,
+      comments: 5,
+      image: 'https://www.unicef.org/nepal/sites/unicef.org.nepal/files/styles/two_column/public/UNICEF%20Jajarkot%20and%20West%20Rukum_Aug%202024-00723.webp?itok=ISGl61bb',
+    },
+    {
+      id: '3',
+      user: {
+        name: 'Siema Gurung',
+        location: 'Bhaktapur',
+      },
+      content: 'Transformed old electronic waste into beautiful art pieces! Check out this lamp made from discarded computer parts. Now selling at the ReLoop Bazar 🎨✨',
+      wasteType: 'Electronics',
+      points: 200,
+      timestamp: '1 day ago',
+      likes: 45,
+      comments: 12,
+      image: 'https://content.instructables.com/FMT/W0Z0/JJ8U54R4/FMTW0Z0JJ8U54R4.jpg?auto=webp',
+    },
+  ];
 
   return (
     <Layout>
@@ -46,18 +55,14 @@ const Index = () => {
           {/* Main Feed */}
           <div className="lg:col-span-3">
             <div className="max-w-2xl mx-auto">
-              <CreatePost onPost={fetchPosts} />
+              <CreatePost />
+              
               <div className="space-y-4">
-                {loading ? (
-                  <div>Loading...</div>
-                ) : posts.length === 0 ? (
-                  <div>No journeys yet.</div>
-                ) : (
-                  posts.map((post) => (
-                    <PostCard key={post.id} post={post} />
-                  ))
-                )}
+                {samplePosts.map((post) => (
+                  <PostCard key={post.id} post={post} />
+                ))}
               </div>
+              
               {/* Load more indicator */}
               <div className="text-center py-8">
                 <div className="inline-flex items-center space-x-2 text-muted-foreground">
@@ -68,6 +73,7 @@ const Index = () => {
               </div>
             </div>
           </div>
+
           {/* Sidebar */}
           <div className="lg:col-span-1">
             <SidebarStats />
