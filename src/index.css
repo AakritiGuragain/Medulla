@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ReLoop Design System - Natural, grounded waste transformation platform
+All colors MUST be HSL. Soft edges, human-centered design.
+*/
+
+@layer base {
+  :root {
+    /* Core Brand Colors */
+    --background: 45 75% 94%; /* #FEFAE0 - Warm cream */
+    --foreground: 94 53% 9%; /* #0A400C - Deep forest green */
+
+    /* Interactive Elements */
+    --primary: 94 53% 9%; /* #0A400C - Deep forest green */
+    --primary-foreground: 45 75% 94%; /* Cream on green */
+    --primary-hover: 94 40% 12%; /* Slightly lighter green for hover */
+
+    --secondary: 86 22% 42%; /* #819067 - Medium sage green */
+    --secondary-foreground: 45 75% 94%; /* Cream text */
+    --secondary-hover: 86 25% 38%; /* Darker sage for hover */
+
+    --accent: 67 25% 62%; /* #B1AB86 - Light sage accent */
+    --accent-foreground: 94 53% 9%; /* Dark green text */
+    --accent-hover: 67 28% 58%; /* Slightly darker sage */
+
+    /* UI Elements */
+    --card: 45 60% 96%; /* Slightly warmer white for cards */
+    --card-foreground: 94 53% 9%;
+    
+    --popover: 45 75% 94%;
+    --popover-foreground: 94 53% 9%;
+
+    --muted: 67 20% 88%; /* Soft sage muted backgrounds */
+    --muted-foreground: 94 30% 25%; /* Muted text */
+
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 45 75% 94%;
+
+    --border: 67 15% 80%; /* Soft sage borders */
+    --input: 67 15% 85%; /* Input backgrounds */
+    --ring: 94 53% 9%; /* Focus rings */
+
+    /* Success states for environmental actions */
+    --success: 120 40% 45%;
+    --success-foreground: 45 75% 94%;
+
+    /* Soft, natural radius */
+    --radius: 0.75rem;
+
+    /* Gradients for organic feel */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--muted)));
+    --gradient-background: linear-gradient(180deg, hsl(var(--background)), hsl(45 60% 92%));
+
+    /* Shadows for natural depth */
+    --shadow-soft: 0 4px 16px hsl(94 53% 9% / 0.08);
+    --shadow-medium: 0 8px 32px hsl(94 53% 9% / 0.12);
+    --shadow-strong: 0 16px 48px hsl(94 53% 9% / 0.16);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Lato', sans-serif;
+    background: var(--gradient-background);
+    min-height: 100vh;
+  }
+
+  /* Custom component styles */
+  .reloop-button-primary {
+    @apply bg-primary hover:bg-primary/90 text-primary-foreground;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-smooth);
+  }
+
+  .reloop-button-secondary {
+    @apply bg-secondary hover:bg-secondary/90 text-secondary-foreground;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-smooth);
+  }
+
+  .reloop-card {
+    @apply bg-card border-border;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-smooth);
+  }
+
+  .reloop-card:hover {
+    box-shadow: var(--shadow-medium);
+    transform: translateY(-1px);
+  }
+}
