@@ -1,8 +1,8 @@
-# ♻️ ReLoop – Transform Waste into Value
+# ReLoop – Transform Waste into Value
 ReLoop is a web-based platform designed to empower communities in the Kathmandu Valley by turning waste into value through the power of AI, gamification, and community engagement. Users can classify waste using AI, earn rewards, engage in a vibrant feed, and participate in a circular economy through a dedicated marketplace.
 
 # Features
-👤 User Registration & Authentication
+User Registration & Authentication
 Simple email/password signup and login.
 
 Authentication is handled securely via JWT tokens.
